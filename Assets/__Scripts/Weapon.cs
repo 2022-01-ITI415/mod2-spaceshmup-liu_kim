@@ -164,7 +164,7 @@ public class Weapon : MonoBehaviour {
     public Projectile MakeProjectileLaser()
     {
         GameObject go = Instantiate<GameObject>(def.projectilePrefab);
-        if (transform.parent.gameObject.tag == "Laser")
+        if (transform.parent.gameObject.tag == "Hero")
         {
             go.tag = "Laser";
             go.layer = LayerMask.NameToLayer("Laser");
