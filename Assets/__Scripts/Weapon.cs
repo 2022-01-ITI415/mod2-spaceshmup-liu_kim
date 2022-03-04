@@ -48,6 +48,10 @@ public class Weapon : MonoBehaviour {
     public float lastShotTime; // Time last shot was fired
     private Renderer collarRend;
 
+    public Vector3 targetPos = new Vector3();
+    public Vector3 thisPos=  new Vector3();
+    public Vector3 deltaPos =  new Vector3();
+
     private void Start()
     {
         collar = transform.Find("Collar").gameObject;
@@ -160,7 +164,7 @@ public class Weapon : MonoBehaviour {
         p.type = type;
         lastShotTime = Time.time;
         // h missle
-        InvokeRepeating("homingMissle", 0.5f, 0.5f);
+        InvokeRepeating("homingMissle", 0.02f, 0.002f);
 
         return p;
     }
@@ -168,24 +172,24 @@ public class Weapon : MonoBehaviour {
     GameObject nearestEnemy;
     int nearestEnemyPos=100;
 
-    GameObject[] enemyArray;
+    GameObject[] enemyArray = new GameObject[0];
 
 
     public void homingMissle()
         {
             // find nearest enemy and target position
             enemyArray=GameObject.FindGameObjectsWithTag("Enemy");
-            for (int i=0; i<Length(enemyArray); i++){
-                Vector3 targetPos= enemyArray[i].transform.position;
-                Vector3 thisPos= GameObject.FindWithTag("ProjectileHero").transform.position;
-                Vector3 deltaPos= (targetPos-thisPos);
+            for (int i=0; i<enemyArray.Length; i++){
+                targetPos= enemyArray[i].transform.position;
+                thisPos= GameObject.FindWithTag("ProjectileHero").transform.position;
+                deltaPos= (targetPos-thisPos);
                 if (deltaPos.magnitude<nearestEnemyPos){
                     nearestEnemy = enemyArray[i];
                 }
             }
-            Vector3 targetPos= nearestEnemy.transform.position;
-            Vector3 thisPos= GameObject.FindWithTag("ProjectileHero").transform.position;
-            Vector3 deltaPos= (targetPos-thisPos);
+            targetPos= nearestEnemy.transform.position;
+            thisPos= GameObject.FindWithTag("ProjectileHero").transform.position;
+            deltaPos= (targetPos-thisPos);
 
             GameObject.FindWithTag("ProjectileHero").GetComponent<Rigidbody>().AddForce(deltaPos*3);
     }
