@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
 /// <summary>
 /// This is an enum of the various possible weapon types.
 /// It also includes a "shield" type to allow a shield power-up.
@@ -132,6 +133,11 @@ public class Weapon : MonoBehaviour {
                 p.transform.rotation = Quaternion.AngleAxis(-10, Vector3.back);
                 p.rigid.velocity = p.transform.rotation * vel;
                 break;
+            case WeaponType.missile:
+                p = MakeProjectile();
+                p.rigid.velocity = vel;
+                // missleScript
+                break;
         }
     }
 
@@ -153,6 +159,35 @@ public class Weapon : MonoBehaviour {
         Projectile p = go.GetComponent<Projectile>();
         p.type = type;
         lastShotTime = Time.time;
+        // h missle
+        InvokeRepeating("homingMissle", 0.5f, 0.5f);
+
         return p;
     }
+
+    GameObject nearestEnemy;
+    int nearestEnemyPos=100;
+
+    GameObject[] enemyArray;
+
+
+    public void homingMissle()
+        {
+            // find nearest enemy and target position
+            enemyArray=GameObject.FindGameObjectsWithTag("Enemy");
+            for (int i=0; i<Length(enemyArray); i++){
+                Vector3 targetPos= enemyArray[i].transform.position;
+                Vector3 thisPos= GameObject.FindWithTag("ProjectileHero").transform.position;
+                Vector3 deltaPos= (targetPos-thisPos);
+                if (deltaPos.magnitude<nearestEnemyPos){
+                    nearestEnemy = enemyArray[i];
+                }
+            }
+            Vector3 targetPos= nearestEnemy.transform.position;
+            Vector3 thisPos= GameObject.FindWithTag("ProjectileHero").transform.position;
+            Vector3 deltaPos= (targetPos-thisPos);
+
+            GameObject.FindWithTag("ProjectileHero").GetComponent<Rigidbody>().AddForce(deltaPos*3);
+    }
+        // 
 }
