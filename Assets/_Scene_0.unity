@@ -363,6 +363,7 @@ MonoBehaviour:
   - {fileID: 1158547974957732, guid: a0a74b7d2e3ac2449b0e77185af83fed, type: 3}
   - {fileID: 1700942416061258, guid: 3f6055558a488314cb38691d88c41fdf, type: 3}
   - {fileID: 1539775467464788, guid: 06677ec088bca734db80dc6ecea1d7af, type: 3}
+  - {fileID: 5209109568177668309, guid: af4528b6ee034b345b591648694c4bd6, type: 3}
   enemySpawnPerSecond: 0.5
   enemyDefaultPadding: 1.5
   weaponDefinitions:
@@ -401,8 +402,8 @@ MonoBehaviour:
     projectilePrefab: {fileID: 1899541879965282, guid: ebeae2704705d9f4385bb1f3539faa97,
       type: 3}
     projectileColor: {r: 1, g: 0, b: 0.008962631, a: 1}
-    damageOnHit: 4
-    continuousDamage: 0
+    damageOnHit: 0.09
+    continuousDamage: 1
     delayBetweenShots: 0
     velocity: 500
   prefabPowerUp: {fileID: 1062273549804748, guid: 9649a9a79085a854d9990613a980f435,
