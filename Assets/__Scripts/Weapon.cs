@@ -132,10 +132,34 @@ public class Weapon : MonoBehaviour {
                 p.transform.rotation = Quaternion.AngleAxis(-10, Vector3.back);
                 p.rigid.velocity = p.transform.rotation * vel;
                 break;
+            case WeaponType.missile:
+                p = MakeProjectileMissile();
+                //p.rigid.velocity = vel;
+                break;
         }
     }
 
     public Projectile MakeProjectile()
+    {
+        GameObject go = Instantiate<GameObject>(def.projectilePrefab);
+        if(transform.parent.gameObject.tag == "Hero")
+        {
+            go.tag = "ProjectileHero";
+            go.layer = LayerMask.NameToLayer("ProjectileHero");
+        }
+        else
+        {
+            go.tag = "ProjectileEnemy";
+            go.layer = LayerMask.NameToLayer("ProjectileEnemy");
+        }
+        go.transform.position = collar.transform.position;
+        go.transform.SetParent(PROJECTILE_ANCHOR, true);
+        Projectile p = go.GetComponent<Projectile>();
+        p.type = type;
+        lastShotTime = Time.time;
+        return p;
+    }
+        public Projectile MakeProjectileMissile()
     {
         GameObject go = Instantiate<GameObject>(def.projectilePrefab);
         if(transform.parent.gameObject.tag == "Hero")
