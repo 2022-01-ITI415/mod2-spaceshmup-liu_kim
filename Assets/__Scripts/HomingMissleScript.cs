@@ -55,14 +55,14 @@ public class HomingMissleScript : MonoBehaviour
             
             // thisMissileRB.velocity += direction/20;
             // thisMissileRB.AddForce(direction);
-            // thisMissileRB.velocity= Vector3.ClampMagnitude(thisMissileRB.velocity, 222);
+             thisMissileRB.velocity= Vector3.ClampMagnitude(thisMissileRB.velocity, 25);
 
 
            // thisMissileRB.velocity=Vector3.Lerp(thisMissile.transform.position, target.transform.position, 1f); 
    
 
             thisMissile.transform.position += direction;
-
+  
             print(thisMissileRB.velocity);
 
 
@@ -85,4 +85,5 @@ public class HomingMissleScript : MonoBehaviour
          return closest;
      }
     //
+
 }
