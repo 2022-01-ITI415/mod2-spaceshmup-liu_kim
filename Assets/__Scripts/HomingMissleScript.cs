@@ -14,8 +14,9 @@ public class HomingMissleScript : MonoBehaviour
         public float curDistance;
         public float distance;
 
-        // public float angleChangingSpeed;
-        // public float movementSpeed;
+        public float angleChangingSpeed;
+        public float movementSpeed;
+        public float rotateAmount;
 
         void Start(){
             //InvokeRepeating("targetEnemy",.0001f,.0001f);
@@ -48,17 +49,20 @@ public class HomingMissleScript : MonoBehaviour
 
             Vector3 direction = target.transform.position - thisMissile.transform.position;
             direction.Normalize ();
-            // rotateAmount = Vector3.Cross (direction, transform.up).z;
-            // thisMissileRB.angularVelocity = -angleChangingSpeed * rotateAmount;
-            // thisMissileRB.velocity = transform.up * movementSpeed;
+		    Vector3 rotateAmount = Vector3.Cross(direction, thisMissile.transform.position);            
+            thisMissileRB.angularVelocity = -rotateAmount*25;
+            thisMissileRB.velocity = transform.up * 5;
             
-            // thisMissileRB.velocity += direction;
+            // thisMissileRB.velocity += direction/20;
             // thisMissileRB.AddForce(direction);
- 
+            // thisMissileRB.velocity= Vector3.ClampMagnitude(thisMissileRB.velocity, 222);
 
-            Vector3.Lerp(thisMissile.transform.position, target.transform.position, .75f); 
+
+           // thisMissileRB.velocity=Vector3.Lerp(thisMissile.transform.position, target.transform.position, 1f); 
+   
+
             thisMissile.transform.position += direction;
-        
+
             print(thisMissileRB.velocity);
 
 
@@ -67,7 +71,6 @@ public class HomingMissleScript : MonoBehaviour
         GameObject FindClosestTarget(string trgt) 
             {
                 enemiesArray= GameObject.FindGameObjectsWithTag(trgt);
-                print(enemiesArray);
                 closest=null;
                 distance = Mathf.Infinity;
                 CurrPosition = thisMissile.transform.position;
