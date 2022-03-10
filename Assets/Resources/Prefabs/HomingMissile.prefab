@@ -163,7 +163,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
-  thisMissile: {fileID: 0}
+  thisMissile: {fileID: 1899541879965282}
   thisMissileRB: {fileID: 0}
   angleChangingSpeed: 0
   movementSpeed: 0

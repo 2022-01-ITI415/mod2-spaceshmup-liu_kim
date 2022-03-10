@@ -36,6 +36,8 @@ public class WeaponDefinition
     public float delayBetweenShots = 0;
     public float velocity = 20; // Speed of projectiles
 }
+
+
 public class Weapon : MonoBehaviour {
     static public Transform PROJECTILE_ANCHOR;
 
@@ -98,7 +100,7 @@ public class Weapon : MonoBehaviour {
         collarRend.material.color = def.color;
         lastShotTime = 0; // You can fire immediately after _type is set.
     }
-
+    GameObject HomingMissile;
     public void Fire()
     {
         Debug.Log("Weapon Fired:" + gameObject.name);
@@ -133,7 +135,12 @@ public class Weapon : MonoBehaviour {
                 p.rigid.velocity = p.transform.rotation * vel;
                 break;
             case WeaponType.missile:
-                p = MakeProjectileMissile();
+                HomingMissile= Resources.Load("Prefabs/HomingMissile") as GameObject;
+                def.projectilePrefab=HomingMissile;
+                def.damageOnHit = 50;
+                def.continuousDamage=1;
+                def.delayBetweenShots=0.5f;
+                p = MakeProjectile();
                 //p.rigid.velocity = vel;
                 break;
         }
@@ -142,26 +149,7 @@ public class Weapon : MonoBehaviour {
     public Projectile MakeProjectile()
     {
         GameObject go = Instantiate<GameObject>(def.projectilePrefab);
-        if(transform.parent.gameObject.tag == "Hero")
-        {
-            go.tag = "ProjectileHero";
-            go.layer = LayerMask.NameToLayer("ProjectileHero");
-        }
-        else
-        {
-            go.tag = "ProjectileEnemy";
-            go.layer = LayerMask.NameToLayer("ProjectileEnemy");
-        }
-        go.transform.position = collar.transform.position;
-        go.transform.SetParent(PROJECTILE_ANCHOR, true);
-        Projectile p = go.GetComponent<Projectile>();
-        p.type = type;
-        lastShotTime = Time.time;
-        return p;
-    }
-        public Projectile MakeProjectileMissile()
-    {
-        GameObject go = Instantiate<GameObject>(def.projectilePrefab);
+        
         if(transform.parent.gameObject.tag == "Hero")
         {
             go.tag = "ProjectileHero";
