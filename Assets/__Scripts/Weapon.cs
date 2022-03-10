@@ -38,6 +38,7 @@ public class WeaponDefinition
 }
 
 
+
 public class Weapon : MonoBehaviour {
     static public Transform PROJECTILE_ANCHOR;
 
@@ -137,10 +138,12 @@ public class Weapon : MonoBehaviour {
             case WeaponType.missile:
                 HomingMissile= Resources.Load("Prefabs/HomingMissile") as GameObject;
                 def.projectilePrefab=HomingMissile;
-                def.damageOnHit = 50;
+                p = MakeProjectile();
+        
+                def.damageOnHit = 5;
                 def.continuousDamage=1;
                 def.delayBetweenShots=0.5f;
-                p = MakeProjectile();
+    
                 //p.rigid.velocity = vel;
                 break;
         }
