@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class HomingMissleScript : MonoBehaviour
     {
-        public GameObject target=null;
+        public GameObject target;
         public GameObject thisMissile;
         public Rigidbody thisMissileRB;
         public GameObject[] enemiesArray;
@@ -29,43 +29,29 @@ public class HomingMissleScript : MonoBehaviour
 
         void FixedUpdate(){
             thisMissile=gameObject;
-            targetEnemy();
+            // get nearest enemy 
+            target=FindClosestTarget("Enemy");
+            print(target);
+
+            if (target != null)
+            {
+                targetEnemy();
+            }
         }
 
         void targetEnemy()
         {
-            //thisMissile=GameObject.Find("HomingMissile");
             print(thisMissile);
             thisMissileRB=thisMissile.GetComponent<Rigidbody>();
             if (GameObject.FindWithTag("Enemy")==null){
                 thisMissileRB.AddForce(0,20,0);
             }
 
-            // get nearest enemy 
 
-            target=FindClosestTarget("Enemy");
-            print(target);
-
-            try{
-                thisMissile=GameObject.Find("HomingMissile");
-            }
-            catch{
-                print("projectile not found");
-            }
-            if (target== null || thisMissile== null){
-                return;
-            }
-
-           // print(target);
-            
             direction = target.transform.position - thisMissile.transform.position;
             direction.Normalize ();
             print(direction);
-		    // Vector3 rotateAmount = Vector3.Cross(direction, thisMissile.transform.position);            
-            // thisMissileRB.angularVelocity = -rotateAmount*25;
-            // //thisMissileRB.velocity = transform.up * 5;
-            
- 
+
 
             //thisMissileRB.velocity= Vector3.ClampMagnitude(thisMissileRB.velocity, 25);
 
