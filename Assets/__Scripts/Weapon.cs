@@ -31,7 +31,7 @@ public class WeaponDefinition
     public Color color = Color.white; // Color of Collar & power-up
     public GameObject projectilePrefab; // Prefab for projectiles
     public Color projectileColor = Color.white;
-    public float damageOnHit = 0; // Amount of damage caused
+    public float damageOnHit = 5; // Amount of damage caused
     public float continuousDamage = 0; // Damage per second (Laser)
     public float delayBetweenShots = 0;
     public float velocity = 20; // Speed of projectiles
@@ -110,6 +110,8 @@ public class Weapon : MonoBehaviour {
             return;
         }
         Projectile p;
+        GameObject laser;       
+        GameObject HomingMissile;       
         Vector3 vel = Vector3.up * def.velocity;
         if (transform.up.y < 0)
         {
@@ -131,6 +133,26 @@ public class Weapon : MonoBehaviour {
                 p = MakeProjectile(); // Make left Projectile
                 p.transform.rotation = Quaternion.AngleAxis(-10, Vector3.back);
                 p.rigid.velocity = p.transform.rotation * vel;
+                break;
+
+            case WeaponType.laser:
+                // laser= Resources.Load("Prefabs/laser") as GameObject;
+                // def.projectilePrefab=laser;
+                p = MakeProjectile();
+                p.rigid.velocity = vel;
+                break;
+
+            case WeaponType.missile:
+                HomingMissile= Resources.Load("Prefabs/HomingMissile") as GameObject;
+                def.projectilePrefab=HomingMissile;
+                p = MakeProjectile();
+               
+                def.damageOnHit = 5;
+                def.continuousDamage=1;
+                def.delayBetweenShots=0.8f;
+                def.velocity=20;
+    
+                //p.rigid.velocity = vel;
                 break;
         }
     }
