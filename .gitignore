@@ -4,8 +4,8 @@
 #
 
 
-//proj version
-projectversion.txt
+#proj version
+ProjectVersion.txt
 
 /[Ll]ibrary/
 /[Tt]emp/
