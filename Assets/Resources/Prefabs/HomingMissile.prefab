@@ -173,9 +173,11 @@ MonoBehaviour:
   thisMissile: {fileID: 1899541879965282}
   thisMissileRB: {fileID: 0}
   enemiesArray: []
+  missileArray: []
   closest: {fileID: 0}
   CurrPosition: {x: 0, y: 0, z: 0}
   diff: {x: 0, y: 0, z: 0}
+  direction: {x: 0, y: 0, z: 0}
   curDistance: 0
   distance: 0
   angleChangingSpeed: 0

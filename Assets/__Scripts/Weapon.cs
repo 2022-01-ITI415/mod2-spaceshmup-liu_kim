@@ -142,7 +142,7 @@ public class Weapon : MonoBehaviour {
                
                 def.damageOnHit = 5;
                 def.continuousDamage=1;
-                def.delayBetweenShots=0.5f;
+                def.delayBetweenShots=0.8f;
                 def.velocity=20;
     
                 //p.rigid.velocity = vel;

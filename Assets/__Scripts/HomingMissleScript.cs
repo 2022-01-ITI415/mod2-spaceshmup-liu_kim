@@ -8,11 +8,13 @@ public class HomingMissleScript : MonoBehaviour
         public GameObject thisMissile;
         public Rigidbody thisMissileRB;
         public GameObject[] enemiesArray;
+        public GameObject[] projectileArray;
+        public GameObject[] missilesArray;
         public GameObject closest;
         public Vector3 CurrPosition;
         public Vector3 diff;
         public Vector3 direction;
-
+        public int missileCounter=0;
        // public Vector3 direction;
 
         public float curDistance;
@@ -28,6 +30,20 @@ public class HomingMissleScript : MonoBehaviour
         }
 
         void FixedUpdate(){
+            //destroy extra missiles
+            projectileArray=GameObject.FindGameObjectsWithTag("ProjectileHero");
+            print(projectileArray.Length);
+            missileCounter=0;
+            foreach (GameObject go in projectileArray){
+                if (go.GetComponent<HomingMissleScript>() != null){
+                    missileCounter+=1;
+                }
+                if (missileCounter>4){
+                    go.SetActive(false);
+                    missileCounter-=1;
+                }
+            }
+
             thisMissile=gameObject;
             // get nearest enemy 
             target=FindClosestTarget("Enemy");
