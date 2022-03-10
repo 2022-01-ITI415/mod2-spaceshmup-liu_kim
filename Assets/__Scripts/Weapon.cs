@@ -110,7 +110,6 @@ public class Weapon : MonoBehaviour {
             return;
         }
         Projectile p;
-        GameObject laser;       
         GameObject HomingMissile;       
         Vector3 vel = Vector3.up * def.velocity;
         if (transform.up.y < 0)
@@ -146,7 +145,7 @@ public class Weapon : MonoBehaviour {
                 HomingMissile= Resources.Load("Prefabs/HomingMissile") as GameObject;
                 def.projectilePrefab=HomingMissile;
                 p = MakeProjectile();
-               
+                def.letter = "m";
                 def.damageOnHit = 5;
                 def.continuousDamage=1;
                 def.delayBetweenShots=0.8f;
