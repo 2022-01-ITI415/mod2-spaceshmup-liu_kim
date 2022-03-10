@@ -56,7 +56,7 @@ public class HomingMissleScript : MonoBehaviour
             // thisMissileRB.AddForce(direction);
  
 
-            Vector3.Lerp(thisMissile.transform.position, target.transform.position, .5f); 
+            Vector3.Lerp(thisMissile.transform.position, target.transform.position, .75f); 
             thisMissile.transform.position += direction;
         
             print(thisMissileRB.velocity);
