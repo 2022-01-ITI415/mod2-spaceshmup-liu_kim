@@ -31,7 +31,7 @@ public class WeaponDefinition
     public Color color = Color.white; // Color of Collar & power-up
     public GameObject projectilePrefab; // Prefab for projectiles
     public Color projectileColor = Color.white;
-    public float damageOnHit = 0; // Amount of damage caused
+    public float damageOnHit = 20; // Amount of damage caused
     public float continuousDamage = 0; // Damage per second (Laser)
     public float delayBetweenShots = 0;
     public float velocity = 20; // Speed of projectiles
@@ -139,10 +139,11 @@ public class Weapon : MonoBehaviour {
                 HomingMissile= Resources.Load("Prefabs/HomingMissile") as GameObject;
                 def.projectilePrefab=HomingMissile;
                 p = MakeProjectile();
-        
+               
                 def.damageOnHit = 5;
                 def.continuousDamage=1;
                 def.delayBetweenShots=0.5f;
+                def.velocity=20;
     
                 //p.rigid.velocity = vel;
                 break;

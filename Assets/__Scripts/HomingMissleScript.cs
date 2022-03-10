@@ -52,6 +52,11 @@ public class HomingMissleScript : MonoBehaviour
             direction.Normalize ();
             print(direction);
 
+		    Vector3 rotateAmount = Vector3.Cross(direction, thisMissile.transform.position);            
+            thisMissileRB.angularVelocity = -rotateAmount*5;
+            thisMissileRB.velocity = transform.up * 5;
+            
+ 
 
             //thisMissileRB.velocity= Vector3.ClampMagnitude(thisMissileRB.velocity, 25);
 
